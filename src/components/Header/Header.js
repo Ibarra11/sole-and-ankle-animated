@@ -20,12 +20,30 @@ const Header = () => {
           <Logo />
         </LogoWrapper>
         <DesktopNav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <NavLinkWrapper>
+            <NavLink href="/sale">Sale</NavLink>
+            <BoldNavLink>Sale</BoldNavLink>
+          </NavLinkWrapper>
+          <NavLinkWrapper>
+            <NavLink href="/new">New&nbsp;Releases</NavLink>
+            <BoldNavLink>New&nbsp;Releases</BoldNavLink>
+          </NavLinkWrapper>
+          <NavLinkWrapper>
+            <NavLink href="/men">Men</NavLink>
+            <BoldNavLink>Men</BoldNavLink>
+          </NavLinkWrapper>
+          <NavLinkWrapper>
+            <NavLink href="/women">Women</NavLink>
+            <BoldNavLink>Women</BoldNavLink>
+          </NavLinkWrapper>
+          <NavLinkWrapper>
+            <NavLink href="/kids">Kids</NavLink>
+            <BoldNavLink>Kids</BoldNavLink>
+          </NavLinkWrapper>
+          <NavLinkWrapper>
+            <NavLink href="/collections">Collections</NavLink>
+            <BoldNavLink>Collections</BoldNavLink>
+          </NavLinkWrapper>
         </DesktopNav>
         <MobileActions>
           <ShoppingBagButton>
@@ -114,16 +132,55 @@ const Filler = styled.div`
   }
 `;
 
+const NavLinkWrapper = styled.div`
+  position: relative;
+
+`;
+
 const NavLink = styled.a`
+  display: block;
   font-size: 1.125rem;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
+  backface-visibility: hidden;
+  transform: rotateX(0deg);
+  transition: transform 300ms;
+  will-change: transform;
 
+ 
   &:first-of-type {
     color: var(--color-secondary);
   }
+ ${NavLinkWrapper}:hover &, ${NavLinkWrapper}:focus & {
+    color: black;
+    transition: color 400ms;
+  }
+
+   @media (prefers-reduced-motion: no-preference){
+    ${NavLinkWrapper}:hover &, ${NavLinkWrapper}:focus & {
+    transform: rotateX(180deg);
+    transition: transform 600ms, color 0ms;
+    color: revert;
+  }
+  }
 `;
+
+const BoldNavLink = styled(NavLink)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotateX(180deg);
+  @media (prefers-reduced-motion: no-preference){
+    ${NavLinkWrapper}:hover &, ${NavLinkWrapper}:focus & {
+     transform: rotateX(0deg);
+    transition: transform 600ms;
+   }   
+  }
+   
+`;
+
+
 
 export default Header;

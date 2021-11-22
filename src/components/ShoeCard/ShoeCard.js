@@ -82,20 +82,23 @@ const Wrapper = styled.article`
 
 const ImageWrapper = styled.div`
   border-radius: 16px 16px 4px 4px;
- 
   overflow: hidden;
+  perspective: 250px;
+  transform-style: preserve-3d;
 `;
 
 const Image = styled.img`
   display: block;
   width: 100%;
-   transition: transform 400ms ease-in;
+   transition: transform 400ms ease-in, filter 800ms ease-in;
     transform-origin: center 75%;
     will-change: transfrom;
+    filter: brightness(90%);
   @media (hover: hover) and (prefers-reduced-motion: no-preference){
       ${Link}:hover  &, ${Link}:focus & {
-   transform: scale(1.05);
-   transition: transform 200ms ease-out;
+   transform: translateZ(25px);
+   transition: transform 200ms ease-out, filter 400ms ease-out;
+   filter: brightness(100%);
   }
   }
 `;
