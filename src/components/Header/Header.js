@@ -20,7 +20,8 @@ const Header = () => {
           <Logo />
         </LogoWrapper>
         <DesktopNav>
-          <NavLinkWrapper>
+        
+             <NavLinkWrapper>
             <NavLink href="/sale">Sale</NavLink>
             <BoldNavLink>Sale</BoldNavLink>
           </NavLinkWrapper>
@@ -44,6 +45,7 @@ const Header = () => {
             <NavLink href="/collections">Collections</NavLink>
             <BoldNavLink>Collections</BoldNavLink>
           </NavLinkWrapper>
+          
         </DesktopNav>
         <MobileActions>
           <ShoppingBagButton>
@@ -134,7 +136,7 @@ const Filler = styled.div`
 
 const NavLinkWrapper = styled.div`
   position: relative;
-
+  overflow: hidden;
 `;
 
 const NavLink = styled.a`
@@ -144,25 +146,18 @@ const NavLink = styled.a`
   text-decoration: none;
   color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
-  backface-visibility: hidden;
-  transform: rotateX(0deg);
   transition: transform 300ms;
   will-change: transform;
-
- 
-  &:first-of-type {
+ transform: translateY(0);
+  ${NavLinkWrapper}:first-of-type > & {
     color: var(--color-secondary);
-  }
- ${NavLinkWrapper}:hover &, ${NavLinkWrapper}:focus & {
-    color: black;
-    transition: color 400ms;
   }
 
    @media (prefers-reduced-motion: no-preference){
     ${NavLinkWrapper}:hover &, ${NavLinkWrapper}:focus & {
-    transform: rotateX(180deg);
-    transition: transform 600ms, color 0ms;
-    color: revert;
+    transform: translateY(-100%);
+    transition: transform 600ms;
+   
   }
   }
 `;
@@ -171,10 +166,11 @@ const BoldNavLink = styled(NavLink)`
   position: absolute;
   top: 0;
   left: 0;
-  transform: rotateX(180deg);
+  transform: translateY(100%);
+  font-weight: ${WEIGHTS.bold};
   @media (prefers-reduced-motion: no-preference){
     ${NavLinkWrapper}:hover &, ${NavLinkWrapper}:focus & {
-     transform: rotateX(0deg);
+     transform: translateY(0);
     transition: transform 600ms;
    }   
   }
